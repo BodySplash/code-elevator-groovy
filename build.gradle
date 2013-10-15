@@ -1,0 +1,28 @@
+apply plugin: 'groovy'    
+apply plugin: 'idea'
+
+repositories {
+	mavenCentral()
+    maven { url 'http://maven.restlet.org' }
+}                 
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.1.7'
+    compile 'org.restlet.jse:org.restlet:2.1.4'
+    compile 'org.restlet.jse:org.restlet.ext.json:2.1.4'
+    compile 'org.restlet.jse:org.restlet.ext.jetty:2.1.4'
+    compile 'com.google.guava:guava:15.0'
+ 	testCompile 'junit:junit:4.11'
+    compile 'org.codehaus.gpars:gpars:1.1.0'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.8'
+}
+
+task deps(type: Sync) {
+    from configurations.compile
+    into "$buildDir/deps"
+}
+
+task stage(dependsOn: ['clean', 'deps', 'jar'])
