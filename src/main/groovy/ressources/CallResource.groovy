@@ -10,6 +10,6 @@ class CallResource extends ServerResource {
     public void représente() {
         def étage = this.getQueryValue("atFloor") as int
         def direction = getQueryValue("to")
-        ActorAscenceur.actor.send(new Expando(action: "CALL", étage: étage, direction: direction))
+        ActorAscenceur.actor << new Expando(action: "CALL", étage: étage, direction: direction)
     }
 }

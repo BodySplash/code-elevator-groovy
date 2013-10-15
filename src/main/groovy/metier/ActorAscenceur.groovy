@@ -18,6 +18,9 @@ public class ActorAscenceur {
                 },
                 GO: { a, it ->
                     a.go(it.étage)
+                },
+                RESET : { a, it ->
+                    a.reset()
                 }]
 
         @Override

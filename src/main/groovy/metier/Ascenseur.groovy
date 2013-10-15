@@ -9,14 +9,11 @@ class Ascenseur {
     protected EtatAscenseur état = new EtatFerme(this)
     protected OrdonnanceurDemandes ordonnanceurDemandes = new OrdonnanceurDemandes()
 
-    protected def demandes = []
-
-
-    def appelle(def étageCible, def direction) {
+    void appelle(def étageCible, def direction) {
         ordonnanceurDemandes.appelle(étageCible, direction)
     }
 
-    def go(def étage) {
+    void go(def étage) {
         ordonnanceurDemandes.go(étage);
     }
 
@@ -24,16 +21,22 @@ class Ascenseur {
         return état.prochaineCommande();
     }
 
-    def arrivé() {
+    void reset() {
+        étage = 0;
+        état = new EtatFerme(this)
+        ordonnanceurDemandes = new OrdonnanceurDemandes()
+    }
+
+    void arrivé() {
         état = new EtatOuvert(this)
         ordonnanceurDemandes.arrivé(étage)
     }
 
-    def descend() {
+    void descend() {
         étage--
     }
 
-    def monte() {
+    void monte() {
         étage++
     }
 
