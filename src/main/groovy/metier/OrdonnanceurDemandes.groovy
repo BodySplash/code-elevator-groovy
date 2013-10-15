@@ -12,29 +12,29 @@ class OrdonnanceurDemandes {
     }
 
     private Optional<Integer> prochainAppel() {
-        if(appels.empty)
+        if (appels.empty)
             return Optional.absent()
         return Optional.of(appels[0])
     }
 
     private Optional<Integer> prochainOrdre() {
-        if(ordres.empty)
+        if (ordres.empty)
             return Optional.absent()
         return Optional.of(ordres[0])
     }
 
     def appelle(def étage, def direction) {
-        if (!appels.contains(étage))
-            appels.add(étage)
+        appels.add(étage)
+        appels.unique()
     }
 
     def go(def étage) {
-        if (!ordres.contains(étage))
-            ordres.add(étage)
+        ordres.add(étage)
+        ordres.unique()
     }
 
     def arrivé(def étage) {
-        appels.remove((Object)étage)
+        appels.remove((Object) étage)
         ordres.remove((Object) étage)
     }
 }
