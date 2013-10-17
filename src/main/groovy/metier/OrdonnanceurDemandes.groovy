@@ -29,8 +29,8 @@ class OrdonnanceurDemandes {
 
     def cheminEntre(def étageCourant, def cible) {
         def direction = Direction.entre(étageCourant, cible)
-        def range = étageCourant..cible.get()
-        def chemin = appelsSurLaRoute(range, direction) << ordresSurLaRoute(range) << cible.get()
+        def range = étageCourant..cible
+        def chemin = appelsSurLaRoute(range, direction) +  ordresSurLaRoute(range) + cible
         chemin.unique()
         chemin.sort(direction.&comparateur)
         return chemin
