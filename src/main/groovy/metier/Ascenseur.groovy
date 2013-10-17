@@ -51,7 +51,7 @@ class Ascenseur {
         abstract String prochaineCommande()
 
         protected Optional<Integer> prochainÉtage() {
-            return ascenseur.ordonnanceurDemandes.prochainÉtage()
+            return ascenseur.ordonnanceurDemandes.prochainÉtage(ascenseur.étage)
         }
 
     }

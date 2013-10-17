@@ -14,7 +14,7 @@ public class ActorAscenceur {
                     reply a.prochaineCommande()
                 },
                 CALL: { a, it ->
-                    a.appelle(it.étage, it.direction)
+                    a.appelle(it.étage, Direction.parse(it.direction))
                 },
                 GO: { a, it ->
                     a.go(it.étage)
