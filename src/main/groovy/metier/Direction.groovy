@@ -10,7 +10,7 @@ public enum Direction {
         }
 
         @Override
-        int compare(étage, autre) {
+        int comparateur(étage, autre) {
             return étage.compareTo(autre)
         }
 
@@ -21,7 +21,7 @@ public enum Direction {
         }
 
         @Override
-        int compare(étage, autre) {
+        int comparateur(étage, autre) {
             autre.compareTo(étage)
         }
     };
@@ -46,7 +46,7 @@ public enum Direction {
 
     }
 
-    int compare(def étage, def autre) {
+    int comparateur(def étage, def autre) {
 
     }
 }

@@ -10,23 +10,15 @@ class OrdonnanceurDemandes {
     Optional<Integer> prochainÉtage(def étageCourant) {
         def résultat = prochainOrdre().or(prochainAppel())
         if (résultat.present) {
-            return Optional.of(cheminEntre(étageCourant, résultat)[0])
+            return Optional.of(cheminEntre(étageCourant, résultat.get())[0])
         }
         return résultat
     }
 
-    def cheminEntre(def étageCourant, Optional<Integer> cible) {
-        def direction = Direction.entre(étageCourant, cible.get())
-        def range = étageCourant..cible.get()
-        def chemin = appels.takeWhile {
-            it.étage in range && it.direction == direction
-        }
-        .collect { it.étage }
-        chemin.addAll(ordres.takeWhile { it in range})
-        chemin.add(cible.get())
-        chemin.unique()
-        chemin.sort(direction.&compare)
-        return chemin
+    private Optional<Integer> prochainOrdre() {
+        if (ordres.empty)
+            return Optional.absent()
+        return Optional.of(ordres[0])
     }
 
     private Optional<Integer> prochainAppel() {
@@ -35,10 +27,24 @@ class OrdonnanceurDemandes {
         return Optional.of(appels[0].étage)
     }
 
-    private Optional<Integer> prochainOrdre() {
-        if (ordres.empty)
-            return Optional.absent()
-        return Optional.of(ordres[0])
+    def cheminEntre(def étageCourant, def cible) {
+        def direction = Direction.entre(étageCourant, cible)
+        def range = étageCourant..cible.get()
+        def chemin = appelsSurLaRoute(range, direction) << ordresSurLaRoute(range) << cible.get()
+        chemin.unique()
+        chemin.sort(direction.&comparateur)
+        return chemin
+    }
+
+    private appelsSurLaRoute(range, direction) {
+        appels.takeWhile {
+            it.étage in range && it.direction == direction
+        }
+        .collect { it.étage }
+    }
+
+    private ordresSurLaRoute(range) {
+        ordres.takeWhile { it in range }
     }
 
     def appelle(def étage, def direction) {
