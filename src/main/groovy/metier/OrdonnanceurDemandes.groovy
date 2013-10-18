@@ -16,15 +16,11 @@ class OrdonnanceurDemandes {
     }
 
     private Optional<Integer> prochainOrdre() {
-        if (ordres.empty)
-            return Optional.absent()
-        return Optional.of(ordres[0])
+        return Optional.fromNullable(ordres[0])
     }
 
     private Optional<Integer> prochainAppel() {
-        if (appels.empty)
-            return Optional.absent()
-        return Optional.of(appels[0].étage)
+        return Optional.fromNullable(appels[0]?.étage)
     }
 
     def cheminEntre(def étageCourant, def cible) {
