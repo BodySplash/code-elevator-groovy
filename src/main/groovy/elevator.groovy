@@ -1,16 +1,19 @@
-import metier.ActorAscenceur
+import commande.AscenseurActor
 import org.restlet.Application
 import org.restlet.Component
+import org.restlet.Context
 import org.restlet.Restlet
 import org.restlet.data.Protocol
 import org.restlet.routing.Router
 import ressources.*
 
-def application = new Application() {
+def actor = new AscenseurActor()
+def context = new Context()
+context.attributes.put("actor", actor)
+def application = new Application(context) {
     @Override
     Restlet createInboundRoot() {
-        def router = new Router()
-
+        def router = new Router(getContext())
         router.attach("/reset", ResetResource)
         router.attach("/nextCommand", NextCommandResource)
         router.attach("/call", CallResource)
@@ -24,7 +27,7 @@ def application = new Application() {
 def component = new Component()
 component.servers.add(Protocol.HTTP, 8181)
 component.defaultHost.attach(application)
-ActorAscenceur.actor.start()
+actor.start()
 component.start()
 
 
