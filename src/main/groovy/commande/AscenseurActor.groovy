@@ -26,7 +26,7 @@ class AscenseurActor extends DefaultActor {
         loop {
             react {
                 println it
-                actions[it.action].call(ascenceur, it)
+                actions[it.action](ascenceur, it)
             }
         }
     }
