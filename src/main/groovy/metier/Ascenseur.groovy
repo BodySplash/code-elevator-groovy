@@ -5,39 +5,39 @@ import com.google.common.base.Optional
 class Ascenseur {
 
 
-    protected int étage = 0;
-    protected EtatAscenseur état = new EtatFerme(this)
+    protected int etage = 0;
+    protected EtatAscenseur etat = new EtatFerme(this)
     protected OrdonnanceurDemandes ordonnanceurDemandes = new OrdonnanceurDemandes()
 
-    void appelle(def étageCible, def direction) {
-        ordonnanceurDemandes.appelle(étageCible, direction)
+    void appelle(def etageCible, def direction) {
+        ordonnanceurDemandes.appelle(etageCible, direction)
     }
 
-    void go(def étage) {
-        ordonnanceurDemandes.go(étage);
+    void go(def etage) {
+        ordonnanceurDemandes.go(etage);
     }
 
     String prochaineCommande() {
-        return état.prochaineCommande();
+        return etat.prochaineCommande();
     }
 
     void reset() {
-        étage = 0;
-        état = new EtatFerme(this)
+        etage = 0;
+        etat = new EtatFerme(this)
         ordonnanceurDemandes = new OrdonnanceurDemandes()
     }
 
-    void arrivé() {
-        état = new EtatOuvert(this)
-        ordonnanceurDemandes.arrivé(étage)
+    void arrive() {
+        etat = new EtatOuvert(this)
+        ordonnanceurDemandes.arrive(etage)
     }
 
     void descend() {
-        étage--
+        etage--
     }
 
     void monte() {
-        étage++
+        etage++
     }
 
     public static abstract class EtatAscenseur {
@@ -50,8 +50,8 @@ class Ascenseur {
 
         abstract String prochaineCommande()
 
-        protected Optional<Integer> prochainÉtage() {
-            return ascenseur.ordonnanceurDemandes.prochainÉtage(ascenseur.étage)
+        protected Optional<Integer> prochainEtage() {
+            return ascenseur.ordonnanceurDemandes.prochainEtage(ascenseur.etage)
         }
 
     }

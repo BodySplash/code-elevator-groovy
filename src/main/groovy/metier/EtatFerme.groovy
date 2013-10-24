@@ -10,11 +10,11 @@ class EtatFerme extends Ascenseur.EtatAscenseur{
 
     @Override
     String prochaineCommande() {
-        Optional<Integer> étage = prochainÉtage()
-        if(!étage.present)
+        Optional<Integer> etage = prochainEtage()
+        if(!etage.present)
             return "NOTHING"
-        ascenseur.état = new EtatEnMouvement(ascenseur)
-        return ascenseur.état.prochaineCommande()
+        ascenseur.etat = new EtatEnMouvement(ascenseur)
+        return ascenseur.etat.prochaineCommande()
     }
 
 }

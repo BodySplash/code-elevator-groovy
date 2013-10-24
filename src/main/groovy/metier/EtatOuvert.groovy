@@ -8,7 +8,7 @@ class EtatOuvert extends Ascenseur.EtatAscenseur{
 
     @Override
     String prochaineCommande() {
-        ascenseur.état = new EtatFerme(ascenseur)
+        ascenseur.etat = new EtatFerme(ascenseur)
         return "CLOSE"
     }
 

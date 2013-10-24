@@ -11,7 +11,6 @@ dependencies {
     compile 'com.google.guava:guava:15.0'
  	testCompile 'junit:junit:4.11'
     compile 'org.codehaus.gpars:gpars:1.1.0'
-    compile 'org.ratpack-framework:ratpack-groovy:0.9.0-SNAPSHOT'
 }
 
 task wrapper(type: Wrapper) {

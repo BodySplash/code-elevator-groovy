@@ -5,24 +5,24 @@ public enum Direction {
 
     HAUT("UP") {
 
-        void déplace(Ascenseur ascenseur) {
+        void deplace(Ascenseur ascenseur) {
             ascenseur.monte()
         }
 
         @Override
-        int comparateur(étage, autre) {
-            return étage.compareTo(autre)
+        int comparateur(etage, autre) {
+            return etage.compareTo(autre)
         }
 
     }, BAS("DOWN") {
 
-        void déplace(Ascenseur ascenseur) {
+        void deplace(Ascenseur ascenseur) {
             ascenseur.descend()
         }
 
         @Override
-        int comparateur(étage, autre) {
-            autre.compareTo(étage)
+        int comparateur(etage, autre) {
+            autre.compareTo(etage)
         }
     };
 
@@ -38,15 +38,15 @@ public enum Direction {
         return BAS
     }
 
-    static def entre(def départ, def cible) {
-        départ < cible ? HAUT : BAS
+    static def entre(def depart, def cible) {
+        depart < cible ? HAUT : BAS
     }
 
-    void déplace(Ascenseur ascenseur) {
+    void deplace(Ascenseur ascenseur) {
 
     }
 
-    int comparateur(def étage, def autre) {
+    int comparateur(def etage, def autre) {
 
     }
 }

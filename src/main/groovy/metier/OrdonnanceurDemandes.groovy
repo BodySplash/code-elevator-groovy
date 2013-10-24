@@ -7,12 +7,12 @@ class OrdonnanceurDemandes {
     private final appels = []
     private final ordres = []
 
-    Optional<Integer> prochainÉtage(def étageCourant) {
-        def résultat = prochainOrdre().or(prochainAppel())
-        if (résultat.present) {
-            return Optional.of(cheminEntre(étageCourant, résultat.get())[0])
+    Optional<Integer> prochainEtage(def etageCourant) {
+        def resultat = prochainOrdre().or(prochainAppel())
+        if (resultat.present) {
+            return Optional.of(cheminEntre(etageCourant, resultat.get())[0])
         }
-        return résultat
+        return resultat
     }
 
     private Optional<Integer> prochainOrdre() {
@@ -20,12 +20,12 @@ class OrdonnanceurDemandes {
     }
 
     private Optional<Integer> prochainAppel() {
-        return Optional.fromNullable(appels[0]?.étage)
+        return Optional.fromNullable(appels[0]?.etage)
     }
 
-    def cheminEntre(def étageCourant, def cible) {
-        def direction = Direction.entre(étageCourant, cible)
-        def range = étageCourant..cible
+    def cheminEntre(def etageCourant, def cible) {
+        def direction = Direction.entre(etageCourant, cible)
+        def range = etageCourant..cible
         def chemin = appelsSurLaRoute(range, direction) +  ordresSurLaRoute(range) + cible
         chemin.unique()
         chemin.sort(direction.&comparateur)
@@ -34,30 +34,30 @@ class OrdonnanceurDemandes {
 
     private appelsSurLaRoute(range, direction) {
         appels.takeWhile {
-            it.étage in range && it.direction == direction
+            it.etage in range && it.direction == direction
         }
-        .collect { it.étage }
+        .collect { it.etage }
     }
 
     private ordresSurLaRoute(range) {
         ordres.takeWhile { it in range }
     }
 
-    def appelle(def étage, def direction) {
-        def appel = new Expando(étage: étage, direction: direction)
+    def appelle(def etage, def direction) {
+        def appel = new Expando(etage : etage, direction : direction)
         appels << appel
         appels.unique()
     }
 
-    def go(def étage) {
-        ordres << étage
+    def go(def etage) {
+        ordres << etage
         ordres.unique()
     }
 
-    def arrivé(def étage) {
+    def arrive(def etage) {
         appels.removeAll {
-            it.étage == étage
+            it.etage == etage
         }
-        ordres.remove((Object) étage)
+        ordres.remove((Object) etage)
     }
 }

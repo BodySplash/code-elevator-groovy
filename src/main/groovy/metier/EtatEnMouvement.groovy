@@ -8,19 +8,19 @@ class EtatEnMouvement extends Ascenseur.EtatAscenseur {
 
     @Override
     String prochaineCommande() {
-        if (prochainÉtage().or(ascenseur.étage) != ascenseur.étage) {
-            def direction = direction(prochainÉtage().get())
-            direction.déplace(ascenseur)
+        if (prochainEtage().or(ascenseur.etage) != ascenseur.etage) {
+            def direction = direction(prochainEtage().get())
+            direction.deplace(ascenseur)
             return direction.commande
         }
-        ascenseur.arrivé()
+        ascenseur.arrive()
         return "OPEN"
 
     }
 
 
     private def direction(cible) {
-        if(cible > ascenseur.étage)
+        if(cible > ascenseur.etage)
             return Direction.HAUT
         return Direction.BAS
     }

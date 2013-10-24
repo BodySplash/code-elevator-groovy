@@ -15,9 +15,9 @@ class OrdonnanceurDemandesTest {
     public void nePrendPasEnCompteDeuxFoisLaMêmeDemande() {
         ordonnanceur.appelle(1, Direction.HAUT)
         ordonnanceur.appelle(1, Direction.HAUT)
-        ordonnanceur.arrivé(1)
+        ordonnanceur.arrive(1)
 
-        def étage = ordonnanceur.prochainÉtage(1)
+        def étage = ordonnanceur.prochainEtage(1)
 
         assert étage.present == false
     }
@@ -27,7 +27,7 @@ class OrdonnanceurDemandesTest {
         ordonnanceur.appelle(1, Direction.BAS)
         ordonnanceur.go(2)
 
-        def étage = ordonnanceur.prochainÉtage(0)
+        def étage = ordonnanceur.prochainEtage(0)
 
         assert étage.get() == 2
     }
@@ -37,7 +37,7 @@ class OrdonnanceurDemandesTest {
         ordonnanceur.go(2)
         ordonnanceur.appelle(1, Direction.HAUT)
 
-        def étage = ordonnanceur.prochainÉtage(0)
+        def étage = ordonnanceur.prochainEtage(0)
 
         assert étage.get() == 1
     }
@@ -47,7 +47,7 @@ class OrdonnanceurDemandesTest {
         ordonnanceur.go(1)
         ordonnanceur.appelle(2, Direction.BAS)
 
-        def étage = ordonnanceur.prochainÉtage(3)
+        def étage = ordonnanceur.prochainEtage(3)
 
         assert étage.get() == 2
     }
@@ -57,7 +57,7 @@ class OrdonnanceurDemandesTest {
         ordonnanceur.go(2)
         ordonnanceur.go(1)
 
-        def étage = ordonnanceur.prochainÉtage(0)
+        def étage = ordonnanceur.prochainEtage(0)
 
         assert étage.get() == 1
     }
