@@ -5,7 +5,7 @@ import commande.AscenseurActor
 def actor = new AscenseurActor()
 actor.start()
 
-def serveur = HttpServer.create(new InetSocketAddress(System.getenv("PORT")?:8181), 0)
+def serveur = HttpServer.create(new InetSocketAddress(System.getenv("PORT") as int ?:8181), 0)
 serveur.setExecutor(null)
 
 def close = { exchange ->
